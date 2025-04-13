@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="form-box">
+        <h2 class="mb-4">Sign in to Your Account</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="text-danger mb-2">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="id_username">Email or Mobile Number</label>
+                <input type="text" class="form-control" id="id_username" name="username" placeholder="Enter email or mobile" required>
+                {% for error in form.username.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" class="form-control" id="id_password" name="password" placeholder="Password" required>
+                {% for error in form.password.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            
+            <div class="text-center mt-3">
+                <a href="#" class="small">Forgot password?</a>
+            </div>
+        </form>
+        
+        <hr>
+        <div class="text-center">
+            <p class="small">New to our site? <a href="{% url 'register' %}">Create an account</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

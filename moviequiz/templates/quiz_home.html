@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">🎬 Welcome to the Movie Quiz!</h1>
+    <p class="lead">
+        Test your movie knowledge and climb the leaderboard!<br>
+        Answer fun questions, earn points, and compete with others.
+    </p>
+    <div class="mt-4">
+        <a href="{% url 'moviequiz:start_quiz' %}" class="btn btn-primary btn-lg me-3">Start Quiz</a>
+        <a href="{% url 'moviequiz:leaderboard' %}" class="btn btn-outline-dark btn-lg">View Leaderboard</a>
+    </div>
+</div>
+{% endblock %}

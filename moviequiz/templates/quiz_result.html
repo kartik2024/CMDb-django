@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h2 class="mb-4">🎉 Quiz Completed!</h2>
+
+  <div class="card mx-auto shadow" style="max-width: 400px;">
+    <div class="card-body">
+      <h4 class="card-title">Hi, {{ request.user.username }}!</h4>
+      <p class="card-text fs-5">
+        You scored <strong>{{ score }}</strong> out of {{ total }}.
+      </p>
+      {% if score == total %}
+        <p class="text-success fw-bold">Perfect score! 🏅</p>
+      {% elif score >= total|divisibleby:2 %}
+        <p class="text-primary">Nice work! You know your movies. 🍿</p>
+      {% else %}
+        <p class="text-warning">Keep watching great films and try again! 🎬</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a href="{% url 'moviequiz:start_quiz' %}" class="btn btn-primary me-2">Try Again</a>
+    <a href="{% url 'moviequiz:leaderboard' %}" class="btn btn-dark">View Leaderboard</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Watchlist</h2>
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-md-4 movie-card">
+            <div class="card h-100">
+                <img src="{% static movie.poster_url %}" class="card-img-top" alt="{{ movie.title }}" loading="lazy">
+                <div class="card-body">
+                    <h5 class="movie-title">{{ movie.title }} ({{ movie.release_year }})</h5>
+                    <p class="movie-rating">IMDb Rating: {{ movie.imdb_rating }}</p>
+                    <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No movies in your watchlist yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
