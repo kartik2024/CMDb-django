@@ -16,10 +16,9 @@ def index(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        # If the user is already authenticated, redirect to the main site or admin based on their role.
-        if request.user.is_staff:  # Check if the user is an admin
-            return redirect('/admin/')  # Redirect admin users to the admin panel
-        return redirect('index')  # Non-admin users go to the main website
+        if request.user.is_staff:  
+            return redirect('/admin/') 
+        return redirect('index')
 
     form = LoginForm(request, data=request.POST or None)
     if request.method == 'POST':
@@ -27,11 +26,9 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, 'Login successful')
-
-            # After successful login, check if the user is an admin
-            if user.is_staff:  # If the user is an admin
-                return redirect('/admin/')  # Redirect admin users to the admin panel
-            return redirect('index')  # Non-admin users go to the main site
+            if user.is_staff: 
+                return redirect('/admin/')  
+            return redirect('index') 
 
     return render(request, 'login.html', {'form': form})
 
@@ -81,7 +78,7 @@ def review_view(request, movie_id):
 
 def get_movies(request):
     offset = int(request.GET.get('offset', 0))
-    limit = int(request.GET.get('limit', 8))  # You can adjust the limit for each scroll
+    limit = int(request.GET.get('limit', 8))
     search = request.GET.get('search', '')
     genre = request.GET.get('genre', '')
     release_year = request.GET.get('release_year', '')
@@ -94,7 +91,7 @@ def get_movies(request):
     if release_year:
         movies = movies.filter(release_year=int(release_year))
 
-    # Pagination logic (limit the number of movies per request)
+   
     movies = movies[offset:offset + limit]
     data = [{'id': m.id, 'title': m.title, 'release_year': m.release_year,
              'imdb_rating': m.imdb_rating, 'poster_url': m.poster_url} for m in movies]

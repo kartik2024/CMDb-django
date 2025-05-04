@@ -8,7 +8,7 @@
     <div class="card-body">
       <h4 class="card-title">Hi, {{ request.user.username }}!</h4>
       <p class="card-text fs-5">
-        You scored <strong>{{ score }}</strong> out of {{ total }}.
+        You scored <strong>{{ score }}</strong> out of 10.
       </p>
       {% if score == total %}
         <p class="text-success fw-bold">Perfect score! 🏅</p>

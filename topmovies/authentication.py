@@ -9,7 +9,7 @@ class EmailOrPhoneBackend(BaseBackend):
             if '@' in username:
                 user = User.objects.get(email=username)
             else:
-                user = User.objects.get(profile__phone=username)  # assuming phone is in a related Profile model
+                user = User.objects.get(profile__phone=username)
         except User.DoesNotExist:
             return None
 
